@@ -1,0 +1,170 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <set>
+#include <cmath>
+using namespace std;
+#define ll long long
+
+// int check(vector < vector <char> > v, int x, int y){
+//     if ((v[x-1][y]!='W') && (v[x+1][y]!='W') && (v[x][y-1]!='W') && (v[x][y+1]!='W')){
+//         return 1;
+//     }
+//     else{
+//         return 0;
+//     }
+// }
+
+void solve(){
+    ll n,m;
+    cin>>n>>m;
+    vector < vector <ll> > v;
+    // ll count2 = 0; 
+    for (int i=0;i<n;i++){
+        // ll count1=0;
+        vector <ll> v1;
+        while(true){
+            i=(i+1)%2;
+            v1.push_back(i);
+            if (v1.size()>m){
+                break;
+            }
+            v1.push_back((i+1)%2);
+            if (v1.size()>m){
+                break;
+            }
+        }
+        v.push_back(v1);
+    }
+
+    // for(auto d:v){
+    //     for (auto d1:d){
+    //         cout<<d1<<" ";
+    //     }
+    //     cout<<endl;
+    // }
+
+
+    for (int i=0;i<n;i++){
+        string s;
+        cin>>s;
+        for (int j=0;j<s.size();j++){
+            if (s[j]=='-'){
+                v[i][j]=-1;
+            }
+        }
+    }
+
+    for(int i=0;i<n;i++){
+        for (int j=0;j<m;j++){
+            cout<<v[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    for(int i=0;i<n;i++){
+        for (int j=0;j<m;j++){
+            ll d1 = v[i][j];
+            if (d1==1){
+                cout<<"W";
+            }
+            else if (d1==0){
+                cout<<"B";
+            }
+            else{
+                cout<<"-";
+            }
+        }
+        cout<<endl;
+    }
+    // for (int i=0;i<n;i++){
+    //     vector <ll> v1;
+    //     string s;
+    //     cin>>s;
+    //     for (auto d:s){
+    //         // if (d=='.'){
+    //         //     v1.push_back('.');
+    //         // }
+    //         // else{
+    //         //     v1.push_back('-');
+    //         // }
+    //         v1.push_back(d);
+    //     }
+    //     v.push_back(v1);
+    // }
+
+    // for(int     )
+
+
+
+
+    // // cout<<endl;
+    // // for (auto d:v){
+    // //     for (auto d1:d){
+    // //         cout<<d1;
+    // //     }
+    // //     cout<<endl;
+    // // }
+    // // cout<<endl;
+
+
+    // vector < vector <char> > v_new;
+    // for (int i=0;i<n+2;i++){
+    //     vector <char> v1_new;
+    //     for (int j=0;j<m+2;j++){
+    //         v1_new.push_back('B');
+    //     }
+    //     v_new.push_back(v1_new);
+    // }
+
+
+    // // cout<<endl;
+    // // for (auto d:v_new){
+    // //     for (auto d1:d){
+    // //         cout<<d1;
+    // //     }
+    // //     cout<<endl;
+    // // }
+    // // cout<<endl;
+
+
+    // for (int i=0;i<n;i++){
+    //     for (int j=0;j<m;j++){
+    //         if ((check(v_new,i+1,j+1)) && (v[i][j]=='.')){
+    //             v_new[i+1][j+1]='W';
+    //         }
+    //         else if (v[i][j]=='-'){
+    //             v_new[i+1][j+1]='-';
+    //         }
+        
+    //     //     if ((v_new[i+1][j]=='-') && ((v[i][j]=='.'))){
+    //     //         v_new[i+1][j+1] = 'B';
+    //     //     }
+    //     // }
+    //     ll count_dash = 0;
+    //     for (int w=j;w>0;w--){
+    //         if (v_new[i+1][w]!='-'){
+    //             break;
+    //         }
+    //         count_dash++;
+    //     }
+    //     if (count_dash%2==0){
+
+    //     }
+        
+    // }
+    // for (int i=0;i<n;i++){
+    //     for (int j=0;j<m;j++){
+    //         cout<<v_new[i+1][j+1];
+    //     }
+    //     cout<<endl;
+    // }
+
+}
+
+int main() 
+{
+
+        solve();
+    
+    return 0;
+}
