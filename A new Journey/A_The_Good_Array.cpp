@@ -13,10 +13,9 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll a;
-    cin>>a;
-    if (a>=5)cout<<"Alice\n";
-    else cout<<"Bob\n";
+    ll a,b;
+    cin>>a>>b;
+    cout<<ceil((a+b-2)/b)+1<<"\n";
 }
 
 int main() 
