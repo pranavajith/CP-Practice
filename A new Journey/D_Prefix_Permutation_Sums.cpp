@@ -12,62 +12,74 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+// ll n;
+
+bool isPerm(vector <ll> v){
+    for (int i=0;i<v.size();i++){
+        if (v[i]>v.size() || v[i]<=0)return false;
+    }
+    set <ll> s(v.begin(),v.end());
+    if (s.size()==v.size())return true;
+    return false;
+}
+
 void solve(){
     ll n;
     cin>>n;
-    vector <ll> v(n-1);
+    vector <ll> v;
     for (int i=0;i<n-1;i++){
-        cin>>v[i];
+        ll a;
+        cin>>a;
+        v.push_back(a);
     }
-    if (n==3 && count(v.begin(),v.end(),2)!=0 && count(v.begin(),v.end(),1)!=0){
-        cout<<"NO\n";
-        return;
-    }
-    if (n==2 && (v[0]!=1 && v[0]!=2 && v[0]!=3)){
-        cout<<"NO\n";
-        return;
-    }
-    vector <ll> v1;
-    for (int i=n-2;i>0;i--){
-        v1.push_back(v[i]-v[i-1]);
-    }
-    // for (auto d:v1)cout<<d<<" ";cout<<"\n";
-    // if (v1.size()!=n-2)
-    vector <ll> v3(n+1,0);
-    v3[0]=1;
-    ll ans1 = INT_MAX;
-    for (int i=0;i<v1.size();i++){
-        if ((v1[i])>n){
-            ans1 = v1[i];
-            // return;
+    if (v[n-2]!=n*(n+1)/2){
+        v.push_back(n*(n+1)/2);
+        vector <ll> v2;
+        v2.push_back(v[0]);
+        for (int i=0;i<n-1;i++){
+            v2.push_back(v[i+1]-v[i]);
         }
-        else v3[v1[i]]+=1;
+        if (isPerm(v2))cout<<"YES\n";
+        else cout<<"NO\n";
     }
-    if (ans1==INT_MAX){
-        for (int i=0;i<v3.size();i++){
-            if (v3[i]>1){
-                ans1=i;
-                
-                break;
+    else{   
+        map <ll,ll> m;
+        m[v[0]]++;
+        for (int i=1;i<n-1;i++){
+            m[v[i]-v[i-1]]++;
+        }
+        vector <ll> v3;
+        for (auto d:m){
+            if (d.second > 1){
+                v3.push_back(d.first);
             }
         }
-    }
-    if (ans1!=INT_MAX){
-        ll a=-1,b=-1,c=-1;
-        for (int i=1;i<v3.size();i++){
-            if (v3[i]!=1 && a==-1)a=i;
-            else if (v3[i]!=1 && b==-1)b=i;
-            else if (v3[i]!=1 && c==-1)c=i;
+        if (v3.size()>1){
+            cout<<"NO\n";
+            return;
         }
-        if ((a+b)==ans1 || (b+c)==ans1 || (c+a)==ans1)cout<<"YES\n";
-        else cout<<"NO\n";
+        // if (m[v3[0]]>2 || m[v3[1]]>2){
+        //     cout<<"NO\n";
+        //     return;
+        // }
+        for (int i=0;i<v3.size();i++){
+            if (m[v3[i]] > 2){
+                cout<<"NO\n";
+                return;
+            }
+        }
+        vector <ll> v4;
+        for (int i=1;i<=n;i++){
+            if (m[i]==0)v4.push_back(i);
+        }
+        if (v4.size()!=2){
+            cout<<"NO\n";
+            return;
+        }
+        cout<<"YES\n";
+        return;
     }
-    else{
-        for (auto d:v3)cout<<d<<" ";
-        if (count(v3.begin(),v3.end(),0)==2)cout<<"YES\n";
-        else cout<<"NO\n";
-    }
-}
+}   
 
 int main() 
 {
