@@ -6,6 +6,7 @@
         "vector": "cpp",
         "iostream": "cpp",
         "iomanip": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "set": "cpp"
     }
 }
