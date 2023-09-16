@@ -25,7 +25,7 @@ void solve(){
     cin>>n>>m>>h;
     vector <pair<ll,ll> > sol;
     // vector <ll> v;
-    for (int i=0;i<n;i++){
+    for (ll i=0;i<n;i++){
         vector <ll> v;
         for (int j=0;j<m;j++){
             ll a;
@@ -33,7 +33,7 @@ void solve(){
             v.push_back(a);
         }
         sort(v.begin(),v.end());
-        int sum1 = 0, w = 0, points = 0, delay = 0;
+        ll sum1 = 0, w = 0, points = 0, delay = 0;
         while (w<v.size() && (sum1 + v[w]<=h)){
             sum1+=v[w];
             points++;
