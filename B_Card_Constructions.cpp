@@ -12,34 +12,26 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+ll pyramid_num(ll n){
+    return (3*n*n + n)/2;
+}
+
 void solve(){
-    ll n;
+    ll n, sol = 0;
     cin>>n;
-    vector <ll> v1;
-    for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        v1.push_back(a);
+    while (n>=2){
+        ll a = 0, b = INT_MAX;
+        while (a<=b){
+            ll mid = (a+b)/2;
+            if (pyramid_num(mid)>n)b=mid-1;
+            else a = mid+1;
+        }
+        a--;
+        sol++;
+        n-=pyramid_num(a);
+        // n=0;
     }
-    ll m;
-    cin>>m;
-    vector <ll> v2;
-    for (int i=0;i<m;i++){
-        ll a;
-        cin>>a;
-        v2.push_back(a);
-    }
-    ll pref1=0, max1 = 0;
-    for (int i=0;i<n;i++){
-        pref1+=v1[i];
-        max1 = max(max1, pref1);
-    }
-    ll pref2=0, max2 = 0;
-    for (int i=0;i<m;i++){
-        pref2+=v2[i];
-        max2 = max(max2, pref2);
-    }
-    cout<<max1+max2<<"\n";
+    cout<<sol<<"\n";
 }
 
 int main() 
