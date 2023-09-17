@@ -21,10 +21,28 @@ void solve(){
         if (i==0){
             cin>>a;
             cursign = a/abs(a);
+            curmax = a;
+            if (n==1)sum1=a;
         }
-        
+        else{
+            cin>>a;
+            if (a/abs(a) != cursign || i==n-1){
+                if (i==n-1 && a/abs(a)==cursign)curmax = max(curmax, a);
+                else if (i==n-1 && a/abs(a)!=cursign){
+                    sum1+=curmax;
+                    curmax=a;
+                }
+                cursign *= -1;
+                // cout<<curmax<<" ";
+                sum1+=curmax;
+                curmax = a;
+            }
+            else{
+                curmax = max(curmax, a);
+            }
+        }
     }
-
+    cout<<sum1<<"\n";
 }
 
 int main() 
