@@ -21,23 +21,29 @@ void solve(){
         cin>>a;
         v.push_back(a);
     }
-    sort(v.begin(), v.end());
-    ll scorealice = 0, scorebob = 0, i = 1;
-    while (v.size()!=0){
-        if (i%2){
-            if (v.back()%2==0)scorealice+=v.back();
-            v.pop_back();
+    sort(v.begin(),v.end());
+    ll i =0, sol = 0;
+    while (i!=n){
+        if (v[i]==1){
+            sol++;
+            i++;
         }
         else{
-            if (v.back()%2)scorebob+=v.back();
-            v.pop_back();
+            ll curlim = v[i], cursize = 1;
+            i++;
+            while (i!=n){
+                curlim = max(curlim, v[i]);
+                cursize++;
+                if (cursize>=curlim){
+                    sol++;
+                    i++;
+                    break;
+                }
+                i++;
+            }
         }
-        i++;
     }
-    // cout<<scorealice<<" "<<scorebob<<"\n";
-    if (scorealice > scorebob)cout<<"Alice\n";
-    else if (scorealice < scorebob)cout<<"Bob\n";
-    else cout<<"Tie\n";
+    cout<<sol<<"\n";
 }
 
 int main() 
