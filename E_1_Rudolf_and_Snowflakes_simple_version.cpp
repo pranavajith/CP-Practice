@@ -12,36 +12,29 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+vector <ll> check(1e7, 0);
+
 void solve(){
     ll n;
     cin>>n;
-    vector <ll> v;
-    bool check = false;
-    for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        if (a>0)check = true;
-        v.push_back(a);
-    }
-    if (check){
-    ll evensum = 0, oddsum = 0;
-    for (int i=0;i<n;i+=2){
-        oddsum+=max(0LL, v[i]);
-    }
-    for (int i=1;i<n;i+=2){
-        evensum+=max(0LL, v[i]);
-    }
-    cout<<max(oddsum, evensum)<<"\n";
-    }
-    else{
-        cout<<*max_element(v.begin(),v.end())<<"\n";
-    }
+    if (check[n])cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() 
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    for (ll i = 2; 1+i+i*i <=1e6 ;i++){
+        ll p = i*i*i;
+        ll temp = 1+i+i*i;
+        for (int j=0;j<20;j++){
+            check[temp]=1;
+            temp+=p;
+            p*=i;
+            if (temp>1e6)break;
+        }
+    }   
     // TxtIO;
     ll t; cin>>t; while(t--)
         solve();

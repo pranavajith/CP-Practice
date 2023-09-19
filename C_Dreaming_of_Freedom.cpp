@@ -13,29 +13,10 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n;
-    cin>>n;
-    vector <ll> v;
-    bool check = false;
-    for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        if (a>0)check = true;
-        v.push_back(a);
-    }
-    if (check){
-    ll evensum = 0, oddsum = 0;
-    for (int i=0;i<n;i+=2){
-        oddsum+=max(0LL, v[i]);
-    }
-    for (int i=1;i<n;i+=2){
-        evensum+=max(0LL, v[i]);
-    }
-    cout<<max(oddsum, evensum)<<"\n";
-    }
-    else{
-        cout<<*max_element(v.begin(),v.end())<<"\n";
-    }
+    ll n,k;
+    cin>>n>>k;
+    if (n%k && (n/2>k|| n==1))cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() 

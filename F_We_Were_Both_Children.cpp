@@ -13,7 +13,23 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-
+    ll n;
+    cin>>n;
+    map <ll,ll> m;
+    for (int i=0;i<n;i++){
+        ll a;
+        cin>>a;
+        if (a<=n)m[a]++;
+    }
+    vector <ll> v(n+1,0);
+    for (auto i:m){
+        ll a = i.first;
+        while (a<=n){
+            v[a]+=i.second;
+            a+=i.first;
+        }
+    }
+    cout<<*max_element(v.begin(),v.end())<<"\n";
 }
 
 int main() 
