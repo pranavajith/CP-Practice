@@ -12,26 +12,25 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-ll isPrime(ll n){
-    for (int i=2;i*i <=n; i++){
-        if (n%i==0)return i;
-    }
-    return 0;
-}
-
 void solve(){
-    ll n,k;
-    cin>>n>>k;
-    if (n==1)cout<<"YES\n";
-    else if (k>=n)cout<<"NO\n";
-    else {
-        ll w = isPrime(n);
-        if (w==0)cout<<"YES\n";
-        else{
-            if (k>=w)cout<<"NO\n";
-            else cout<<"YES\n";
+    ll n;
+    cin>>n;
+    vector <ll> v(n);
+    for (int i=0;i<n;i++)cin>>v[i];
+    if (n%2)cout<<"YES\n";
+    else{
+        vector <ll> v1;
+        for (int i=1;i<n;i++){
+            v1.push_back(v[i]-v[i-1]);
         }
+        ll sum1=0;
+        for (int i=0;i<v1.size();i+=2){
+            sum1+=v1[i];
+        }
+        if (sum1>=0)cout<<"YES\n";
+        else cout<<"NO\n";
     }
+
 }
 
 int main() 

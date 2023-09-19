@@ -5,6 +5,7 @@
         "iostream": "cpp",
         "string": "cpp",
         "set": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "charconv": "cpp"
     }
 }
