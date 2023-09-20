@@ -12,31 +12,25 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve() {
-    // Add your solution here
- 
+void solve(){
     ll n;
     cin>>n;
- 
-    vector<ll> a(n);
- 
-    for(auto &i: a) cin>>i;
- 
-    if(n%2){
-        cout<<"YES"<<endl;
-        return;
+    vector <ll> v(n);
+    for (int i=0;i<n;i++)cin>>v[i];
+    if (n%2)cout<<"Yes\n";
+    else{
+        vector <ll> v1;
+        for (int i=1;i<n;i++){
+            v1.push_back(v[i]-v[i-1]);
+        }
+        ll sum1=0;
+        for (int i=0;i<v1.size();i+=2){
+            sum1+=v1[i];
+        }
+        if (sum1>=0)cout<<"Yes\n";
+        else cout<<"No\n";
     }
- 
-    ll cap=0;
-    for(ll i=0;i<n;i+=2){
-        cap+=a[i+1]-a[i];
-    }
- 
-    if(cap >=0) cout<<"YES"<<endl;
-    else cout<<"NO"<<endl;
- 
-    
- 
+
 }
 
 int main() 

@@ -13,12 +13,12 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,c,d, duplisum = 0;
-    cin>>n>>c>>d;
-    vector <ll> v;
-    map <ll,ll> m;
+    long long int n,c,d, duplisum = 0;
+    cin>>n>>d>>c;
+    vector <long long int> v;
+    map <long long int,long long int> m;
     for (int i=0;i<n;i++){
-        ll a;
+        long long int a;
         cin>>a;
         if (m[a])duplisum+=d;
         else{
@@ -27,26 +27,31 @@ void solve(){
         }
     }
     sort(v.begin(),v.end());
-    ll i = 1;
+    long long int i = 0;
     n=v.size();
-    while (i==v[i] && i!=n)i++;
-    if (i==n)cout<<duplisum<<"\n";
+    while (i!=n && i+1==v[i])i++;
+    if (i==n)cout<<duplisum<<"\n"; 
     else{
-        ll fin = n*d + c;
-        ll pointer = 0;
+        // i--;
+        long long int fin=0;
+        if (i!=0)fin = (n-i)*d;
+        else fin = n*d + c;
+        long long int pointer = i;
+        long long int temp = fin;
         while (pointer!=n){
-            ll temp;
-            if (pointer == 0){
-                temp = c*(v[pointer]-1)+(n-1)*d;
-            }
-            else{
+            // long long int temp;
+            // if (pointer == 0){
+            //     temp = d*n;
+            // }
+            // else{
                 temp += (v[pointer]-v[pointer-1]-1)*c - d;
-            }
+            // }
             if (fin <= temp)break;
             fin = temp;
             pointer++;
         }
-        cout<<fin<<"\n";
+        cout<<fin+duplisum<<"\n";
+        // cout<<duplisum<<"!!!\n";
     }
 }
 
@@ -55,7 +60,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    long long int t; cin>>t; while(t--)
         solve();
     return 0;
 }
