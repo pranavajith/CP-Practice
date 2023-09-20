@@ -6,6 +6,7 @@
         "string": "cpp",
         "set": "cpp",
         "algorithm": "cpp",
-        "charconv": "cpp"
+        "charconv": "cpp",
+        "iosfwd": "cpp"
     }
 }
