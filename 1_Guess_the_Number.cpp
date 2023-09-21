@@ -20,22 +20,27 @@ void solve(){
         // cout<<flush;
         // printf("%d\n", mid);
         // fflush(stdout);
-        // char response[3];
-        // cin>>response;
-        // if (strcmp(response, "<") == 0)
-        //     r = mid - 1;
-        // else
-        //     l = mid;
         string s;
         cin>>s;
-        if (s=="<")l=mid;
-        else r=mid-1;
+        if (s=="<")
+            r = mid - 1;
+        else
+            l = mid;
+
+
+
+        // string s;
+        // cin>>s;
+        // if (s[0]=='>')r=mid-1;
+        // else l=mid;
+
+
+
         // char response[3];
         // scanf("%s", response);
-        // if (strcmp(response, "<") == 0)
-        //     r = mid - 1;
-        // else
-        //     l = mid;
+        // // if (strcmp(response, "<") == 0)
+        // if (response[0]=='>')r = mid - 1;
+        // else l = mid;
     }
 
     cout<<"! "<<l<<"\n"<<flush;
