@@ -15,35 +15,17 @@ using namespace std;
 void solve(){
     ll n,w,h;
     cin>>n>>w>>h;
-    vector <ll> cakes;
-    vector <ll> dispenser;
+    vector <ll> cakes(n);
+    vector <ll> dispenser(n);
+    for (int i=0;i<n;i++)cin>>cakes[i];
+    for (int i=0;i<n;i++)cin>>dispenser[i];
+    ll max1 = INT_MIN, min1 = INT_MAX;
     for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        cakes.push_back(a-w);
-        cakes.push_back(a+w);
+        max1= max(max1, cakes[i]-dispenser[i]);
+        min1= min(min1, cakes[i]-dispenser[i]);
     }
-    for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        dispenser.push_back(a-h);
-        dispenser.push_back(a+h);
-    }
-    for (int i=0;i<2*n;i++){
-        if (i%2==0){
-            if (dispenser[i]<cakes[i]){
-                cout<<"NO\n";
-                return;
-            }
-        }
-        else{
-            if (dispenser[i]>cakes[i]){
-                cout<<"NO\n";
-                return;
-            }
-        }
-    }
-    cout<<"YES\n";
+    if (max1+h-w <= min1-h+w)cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() 
