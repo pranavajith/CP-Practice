@@ -9,6 +9,7 @@
         "charconv": "cpp",
         "iosfwd": "cpp",
         "ostream": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "map": "cpp"
     }
 }
