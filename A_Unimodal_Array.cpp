@@ -23,6 +23,8 @@ void solve(){
         cin>>a;
         v.push_back(a);
         s.insert(a);
+        
+        
     }
     v.push_back(INT_MIN);
     int i=0;
