@@ -24,22 +24,21 @@ void solve(){
 
     if (*min_element(apple.begin(),apple.end())>k)cout<<0<<"\n";
     else{
-        ll ans = 1, iter = 1, curnum = apple[0];
-        for (int i=1;i<n;i++){
-            if (height[i-1]%height[i]==0 && curnum+apple[i]<=k){
-                iter++;
-                curnum+=apple[i];
-                if (i==n-1){
-                    ans = max(ans, iter);
+        ll ans = INT_MIN;
+        ll a=0, b=0, curw=apple[0];
+        for (;b<n;b++){
+            if (height[b-1]%height[b]==0){
+                while (curw + apple[b] <= k && height[b-1]%height[b]==0)b++;
+
+
+                if (b==n-1){
+                     ans = max(ans, b-a);
                 }
             }
             else{
-                ans = max(ans, iter);
-                iter = 1;
-                curnum = apple[i];
+                ans = max(ans, b-a);
             }
         }
-        cout<<ans<<"\n";
     }
 
 }
