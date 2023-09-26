@@ -28,7 +28,9 @@ void solve(){
         ll a=0, b=0, curw=apple[0];
         for (;b<n;b++){
             if (height[b-1]%height[b]==0){
-                while (curw + apple[b] <= k && height[b-1]%height[b]==0)b++;
+                while (curw + apple[b] <= k && height[b-1]%height[b]==0){curw+=apple[b]; b++; }
+                ans = max(ans, b-a);
+                a++
 
 
                 if (b==n-1){
