@@ -10,6 +10,8 @@
         "iosfwd": "cpp",
         "ostream": "cpp",
         "random": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "__bit_reference": "cpp",
+        "numeric": "cpp"
     }
 }
