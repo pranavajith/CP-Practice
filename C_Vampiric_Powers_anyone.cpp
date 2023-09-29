@@ -13,28 +13,21 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, m, lol;
-    bool check = true;
-    cin>>n>>m;
+    ll n;
+    cin>>n;
+    vector <ll> v(n);
+    for (int i=0;i<n;i++)cin>>v[i];
+    // vector <bool> check(1e8);
     set <ll> s;
+    s.insert(0);
+    // check[0]=true;
+    ll curxor = 0, ans = 0;
     for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        s.insert(a);
+        curxor^=v[i];
+        for (auto d:s)ans = max(ans, curxor^d);
+        s.insert(curxor);
     }
-    if (s.size()>m)cout<<-1;
-    else{
-        
-        vector <ll> v(s.begin(),s.end());
-        cout<<m*n<<"\n";
-        while (v.size()<m)v.push_back(1);
-        for (int i=0;i<n;i++){
-            for (int j=0;j<m;j++){
-                cout<<v[j]<<" ";
-            }
-        }
-    }
-    cout<<"\n";
+    cout<<ans<<"\n";
 }
 
 int main() 

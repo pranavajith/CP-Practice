@@ -13,28 +13,27 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, m, lol;
-    bool check = true;
-    cin>>n>>m;
-    set <ll> s;
+    ll n, tot = 0, siz=0, cursiz = 0, aprev = 0;
+    cin>>n;
+    vector <ll> v;
+    // cin>>first>>second;
     for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        s.insert(a);
-    }
-    if (s.size()>m)cout<<-1;
-    else{
-        
-        vector <ll> v(s.begin(),s.end());
-        cout<<m*n<<"\n";
-        while (v.size()<m)v.push_back(1);
-        for (int i=0;i<n;i++){
-            for (int j=0;j<m;j++){
-                cout<<v[j]<<" ";
-            }
+        ll a, b;
+        cin>>a>>b;
+        if (i==0){
+            tot = a+b;
+            siz = b;
+            cursiz = b;
+            aprev = a;
+        }
+        else{
+            tot = max(tot, a)+b;
+            cursiz = max(0LL,cursiz - (a-aprev)) + b;
+            siz = max(cursiz, siz);
+            aprev = a;
         }
     }
-    cout<<"\n";
+    cout<<tot<<" "<<siz;
 }
 
 int main() 
@@ -42,7 +41,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

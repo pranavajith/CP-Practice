@@ -13,28 +13,30 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, m, lol;
-    bool check = true;
-    cin>>n>>m;
-    set <ll> s;
+    ll n, ans=0;
+    cin>>n;
+    vector <ll> a(n);
+    vector <ll> b(n);
+    map <ll,ll> m;
+    vector <ll> pos(2e5+5);
     for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        s.insert(a);
+        cin>>a[i];
+        pos[a[i]]=i;
     }
-    if (s.size()>m)cout<<-1;
-    else{
-        
-        vector <ll> v(s.begin(),s.end());
-        cout<<m*n<<"\n";
-        while (v.size()<m)v.push_back(1);
-        for (int i=0;i<n;i++){
-            for (int j=0;j<m;j++){
-                cout<<v[j]<<" ";
-            }
-        }
+    for (int i=0;i<n;i++){
+        cin>>b[i];
     }
-    cout<<"\n";
+    for (int i=0;i<n;i++){
+        ll temp = pos[b[i]]-pos[a[i]];
+        if (temp<0)temp+=n;
+        m[temp]++;
+    }
+    for (auto i:m){
+        ans = max(ans, i.second);
+    }
+    cout<<ans<<"\n";
+
+    
 }
 
 int main() 
@@ -42,7 +44,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

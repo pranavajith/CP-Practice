@@ -12,29 +12,25 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+ll gcd(ll a, ll b){
+    if (b==0)return a;
+    return gcd(b, a%b);
+}
+
+ll lcm(ll a, ll b){
+    return a*b/gcd(a,b);
+}
+
 void solve(){
-    ll n, m, lol;
-    bool check = true;
-    cin>>n>>m;
-    set <ll> s;
-    for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        s.insert(a);
+    ll n, sol;
+    cin>>n;
+    if (n==1){
+        cout<<1<<" "<<1<<"\n";return;
     }
-    if (s.size()>m)cout<<-1;
-    else{
-        
-        vector <ll> v(s.begin(),s.end());
-        cout<<m*n<<"\n";
-        while (v.size()<m)v.push_back(1);
-        for (int i=0;i<n;i++){
-            for (int j=0;j<m;j++){
-                cout<<v[j]<<" ";
-            }
-        }
+    for (ll i=1; i*i <=n; i++){
+        if (n%i==0 && lcm(i,n/i)==n)sol = i;
     }
-    cout<<"\n";
+    cout<<sol<<" "<<n/sol;
 }
 
 int main() 
@@ -42,7 +38,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

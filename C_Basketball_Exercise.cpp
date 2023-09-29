@@ -12,29 +12,32 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+// ll sol = LLONG_MAX;
+
+vector <ll> dp(1e7,0);
+
+
+
 void solve(){
-    ll n, m, lol;
-    bool check = true;
-    cin>>n>>m;
-    set <ll> s;
+    ll n;
+    cin>>n;
+    vector < vector <ll> > v(2);
+    for (int i=0;i<2;i++){
+        vector <ll> temp(n);
+        for (int j=0;j<n;j++)cin>>temp[j];
+        v[i]=temp;
+    }
+    vector <ll> v1(2);
+    v1[0]=0;
+    v1[1]=0;
     for (int i=0;i<n;i++){
-        ll a;
-        cin>>a;
-        s.insert(a);
+        vector <ll> v2(2);
+        v2[0]=max(v1[0], v1[1]+v[0][i]);
+        v2[1]=max(v1[1], v1[0]+v[1][i]);
+        v1=v2;
     }
-    if (s.size()>m)cout<<-1;
-    else{
-        
-        vector <ll> v(s.begin(),s.end());
-        cout<<m*n<<"\n";
-        while (v.size()<m)v.push_back(1);
-        for (int i=0;i<n;i++){
-            for (int j=0;j<m;j++){
-                cout<<v[j]<<" ";
-            }
-        }
-    }
-    cout<<"\n";
+    cout<<max(v1[0],v1[1])<<"\n";
+
 }
 
 int main() 
@@ -42,7 +45,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

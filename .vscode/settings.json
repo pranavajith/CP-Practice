@@ -12,6 +12,7 @@
         "random": "cpp",
         "map": "cpp",
         "__bit_reference": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "limits": "cpp"
     }
 }
