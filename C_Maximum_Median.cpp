@@ -18,7 +18,33 @@ void solve(){
     vector <ll> v(n);
     for (int i=0;i<n;i++)cin>>v[i];
     sort(v.begin(),v.end());
-    
+    if (n==1){
+        cout<<v[0]+m;
+        return;
+    }
+    ll k=1, i = n/2;
+    while (m-k>=0){
+        while (i<n && v[i]==v[n/2])i++;
+        k=i-n/2;
+
+        if (i!=n){
+            if ((v[i]-v[n/2])*k<=m){
+                m-=(v[i]-v[n/2])*k;
+                v[n/2]=v[i];
+                // m-=
+            }
+            else if (m>=k){
+                v[n/2]+=m/k;
+                break;
+            }
+            else break;
+        }
+        else{
+            v[n/2]+=m/k;
+                break;
+        }
+    }
+    cout<<v[n/2];
 }   
 
 int main() 

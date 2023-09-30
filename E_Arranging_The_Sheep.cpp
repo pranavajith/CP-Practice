@@ -13,34 +13,33 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,m;
-    cin>>n>>m;
-    vector <ll> v(n);
-    for (int i=0;i<n;i++)cin>>v[i];
-    sort(v.begin(),v.end());
-    if (n==1){
-        cout<<v[0]+m;
-        return;
+    ll n, numsheep = 0;
+    cin>>n;
+    string s;
+    cin>>s;
+    map  <ll,ll>  m;
+    for (int i=0;i<n;i++){
+        if (s[i]=='*'){
+            numsheep++;
+            // v.push_back(make_pair(numsheep, i+1));
+            m[numsheep]=i+1;
+        }
     }
-    ll k=1, i = n/2;
-    while (m-k>=0){
-        while (i<n && v[i]==v[n/2])i++;
-        k=i-n/2;
-       
-        if (m-k<0)break;
-        //  cout<<k<<"\n";
-        v[n/2]++;
-        m-=k;
+    ll sol = 0;
+    // cout<<m[(numsheep+1)/2]<<"\n";
+    for (int i=1;i<=numsheep;i++){
+        sol += abs(m[i] - (m[(numsheep+1)/2] - (numsheep+1)/2 + i));
     }
-    cout<<v[n/2];
-}   
+    cout<<sol<<"\n";
+
+}
 
 int main() 
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    // ll t; cin>>t; while(t--)
+    ll t; cin>>t; while(t--)
         solve();
     return 0;
 }
