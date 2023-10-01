@@ -22,7 +22,17 @@ void solve(){
         cin>>a;
         v1.push_back(a);
     }
-    
+    sort(v1.begin(), v1.end());
+    ll a = v1[0]%d, sol=0;
+    for (int i=0;i<n*m;i++){
+        if (v1[i]%d != a){
+            cout<<-1;return;
+        }
+        sol+=abs(v1[n*m/2]-v1[i]);
+    }
+    cout<<sol/d;
+
+
     // ll count1=0;
  
     // cout<<count1<<"\n";
