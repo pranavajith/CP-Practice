@@ -13,26 +13,19 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, k;
-    cin>>n>>k;
-    vector <ll> v(n), v1(k);
+    ll a,b,n;
+    cin>>a>>b>>n;
+    vector <ll> v(n);
     for (int i=0;i<n;i++)cin>>v[i];
-    for (int i=0;i<k;i++)cin>>v1[i];
     sort(v.begin(), v.end());
-    sort(v1.begin(), v1.end());
-    ll id=-1, sol = 0, l = 0, r = n-1;
-    for (int i=0;i<k;i++){
-        if (v1[i]!=1)break;
-        sol+=2*v[r];r--;
-        id = i;
+    ll count1=0, sum1=0;
+    for (int i=0;i<n;i++){
+        if (v[i]<a){
+            count1++;
+            sum1+=v[i];
+            }
     }
-    // for (int j=k-1;j>)
-    
-    for (int i=k-1;i>id;i--){
-        sol+=v[l]+v[r--]; 
-        l+=v1[i]-1;
-    }
-    cout<<sol<<"\n";
+    cout<<b-1+sum1+(n-count1)*(a-1)+1<<"\n";
 }
 
 int main() 

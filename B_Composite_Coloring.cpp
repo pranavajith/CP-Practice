@@ -12,27 +12,35 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+ll mindiv(ll a){
+    for (int i=2;i*i<=a;i++){
+        if (a%i==0)return i;
+    }
+    return -1;
+}
+
 void solve(){
-    ll n, k;
-    cin>>n>>k;
-    vector <ll> v(n), v1(k);
-    for (int i=0;i<n;i++)cin>>v[i];
-    for (int i=0;i<k;i++)cin>>v1[i];
-    sort(v.begin(), v.end());
-    sort(v1.begin(), v1.end());
-    ll id=-1, sol = 0, l = 0, r = n-1;
-    for (int i=0;i<k;i++){
-        if (v1[i]!=1)break;
-        sol+=2*v[r];r--;
-        id = i;
+    ll n;
+    cin>>n;
+    vector <ll> v;
+    set <ll> s;
+    for (int i=0;i<n;i++){
+        ll a;
+        cin>>a;
+        v.push_back(mindiv(a));
+        s.insert(v.back());
     }
-    // for (int j=k-1;j>)
-    
-    for (int i=k-1;i>id;i--){
-        sol+=v[l]+v[r--]; 
-        l+=v1[i]-1;
+    // cout<<s.size()<<"\n";
+    map <ll,ll> m;
+    ll count1=1;
+    for (auto d:s){
+        m[d]=count1++;
     }
-    cout<<sol<<"\n";
+    cout<<s.size()<<"\n";
+    for (auto d:v){
+        cout<<m[d]<<" ";
+    }
+    cout<<"\n";
 }
 
 int main() 

@@ -13,24 +13,22 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, k;
-    cin>>n>>k;
-    vector <ll> v(n), v1(k);
+    ll n,l,r,x, sol=0;
+    cin>>n>>l>>r>>x;
+    vector <ll> v(n);
     for (int i=0;i<n;i++)cin>>v[i];
-    for (int i=0;i<k;i++)cin>>v1[i];
-    sort(v.begin(), v.end());
-    sort(v1.begin(), v1.end());
-    ll id=-1, sol = 0, l = 0, r = n-1;
-    for (int i=0;i<k;i++){
-        if (v1[i]!=1)break;
-        sol+=2*v[r];r--;
-        id = i;
-    }
-    // for (int j=k-1;j>)
-    
-    for (int i=k-1;i>id;i--){
-        sol+=v[l]+v[r--]; 
-        l+=v1[i]-1;
+    for (int i=0;i<(1<<n);i++){
+        ll minel = INT_MAX, maxel = INT_MIN, sum1=0, check = i;
+        for (int j=0;j<n;j++){
+            if ((i>>j)&1){
+                minel = min(minel, v[j]);
+                maxel = max(maxel, v[j]);
+                sum1 += v[j];
+            }
+        }
+        if (sum1>=l && sum1<=r && maxel - minel >= x){
+            sol++;
+        }
     }
     cout<<sol<<"\n";
 }
@@ -40,7 +38,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }
