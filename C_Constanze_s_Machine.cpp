@@ -12,6 +12,8 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+vector <ll> fact(1e5, 0);
+
 void solve(){
     string s;
     cin>>s;
@@ -28,7 +30,7 @@ void solve(){
             sol%=(1000000007);
         }
         else if (countun!=0){
-            sol *= countun*(countun+1)/2;
+            sol *= fact[countun+1];
             sol%=(1000000007);
         }
         countun=0;
@@ -41,6 +43,13 @@ int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    fact[0]=0;
+    fact[1]=1;
+    fact[2]=2;
+    fact[3]=3;
+    for (int i=4;i<1e5;i++){
+        fact[i]=(fact[i-1]+fact[i-2])%1000000007;
+    }
     // TxtIO;
     // ll t; cin>>t; while(t--)
         solve();

@@ -13,34 +13,15 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n;
-    cin>>n;
     string s;
     cin>>s;
-    ll first1 = -1, last1 = -1;
-
-    // Finding First Occurance of 1
-    for (int i=0;i<n;i++){
-        if (s[i]=='1'){
-            first1 = i;
-            break;
-        }
-    }
-
-    // Finding Last Occurance of 1
-    for (int i=n-1;i>=0;i--){
-        if (s[i]=='1'){
-            last1 = i;
-            break;
-        }
-    }
-
-    // If there is no 1 in the list (Special Case)
-    if (first1 == -1) cout<<n<<"\n";
-
-    // General Case
-    else cout<<max(2*(last1+1), 2*(n-first1))<<"\n";
-    
+    vector<int> cnt(10);
+    for (auto c : s) ++cnt[c - '0'];
+    int mx = *max_element(cnt.begin(), cnt.end());
+    if (mx == 4) cout << -1;
+    else if (mx == 3) cout << 6;
+    else cout << 4;
+    cout << '\n';
 }
 
 int main() 

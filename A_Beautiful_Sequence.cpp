@@ -15,31 +15,18 @@ using namespace std;
 void solve(){
     ll n;
     cin>>n;
-    string s;
-    cin>>s;
-    ll first1 = -1, last1 = -1;
-
-    // Finding First Occurance of 1
+    bool check = true;
+    // vector <ll> v(n);
     for (int i=0;i<n;i++){
-        if (s[i]=='1'){
-            first1 = i;
-            break;
+        ll a;
+        cin>>a;
+        // cout<<a<<" "<<i+1<<"\n";
+        if (check && a <= i+1){
+            cout<<"YES\n";
+            check = false;
         }
     }
-
-    // Finding Last Occurance of 1
-    for (int i=n-1;i>=0;i--){
-        if (s[i]=='1'){
-            last1 = i;
-            break;
-        }
-    }
-
-    // If there is no 1 in the list (Special Case)
-    if (first1 == -1) cout<<n<<"\n";
-
-    // General Case
-    else cout<<max(2*(last1+1), 2*(n-first1))<<"\n";
+    if (check) cout<<"NO\n";
     
 }
 

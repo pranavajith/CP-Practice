@@ -15,32 +15,34 @@ using namespace std;
 void solve(){
     ll n;
     cin>>n;
-    string s;
-    cin>>s;
-    ll first1 = -1, last1 = -1;
-
-    // Finding First Occurance of 1
+    vector<ll> a;
     for (int i=0;i<n;i++){
-        if (s[i]=='1'){
-            first1 = i;
-            break;
-        }
+        ll a1;
+        cin>>a1;
+        a.push_back(a1);
     }
-
-    // Finding Last Occurance of 1
-    for (int i=n-1;i>=0;i--){
-        if (s[i]=='1'){
-            last1 = i;
-            break;
+    ll sum = accumulate(a.begin(), a.end(), 0LL);
+    for (int i = n; i >= 1; i--) {
+    if (sum % i == 0) {
+      ll needSum = sum / i;
+      ll curSum = 0;
+      bool ok = true;
+      for (int j = 0; j < n; j++) {
+        curSum += a[j];
+        if (curSum > needSum) {
+          ok = false;
+          break;
+        } else if (curSum == needSum) {
+          curSum = 0;
         }
+      }
+
+      if (ok) {
+        cout << n - i << endl;
+        return;
+      }
     }
-
-    // If there is no 1 in the list (Special Case)
-    if (first1 == -1) cout<<n<<"\n";
-
-    // General Case
-    else cout<<max(2*(last1+1), 2*(n-first1))<<"\n";
-    
+  }
 }
 
 int main() 
