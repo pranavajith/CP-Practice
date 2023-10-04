@@ -18,6 +18,10 @@
         "latch": "cpp",
         "semaphore": "cpp",
         "valarray": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "__locale": "cpp",
+        "iomanip": "cpp",
+        "regex": "cpp",
+        "span": "cpp"
     }
 }
