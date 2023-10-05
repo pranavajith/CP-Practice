@@ -16,15 +16,23 @@ void solve(){
     ll n,k;
     cin>>n>>k;
     vector <ll> v(n);
-    for (int i=0;i<n;i++)cin>>v[i];
+    for (int i=0;i<n-1;i++)cin>>v[i];
+    if (k==n){
+        cout<<"YES\n";
+        return;
+    }
     ll iter = 0;
-    while (iter!=n){
+    // cout<<iter<<" ";
+    while (iter<n-1){
+        // cout<<iter<<" ";
         if (iter+1 == k){
             cout<<"YES\n";
             return;
         }
         iter+=v[iter];
-        cout<<iter<<" ";
+        char c;
+        cin>>c;
+        
     }
     cout<<"NO\n";
 }

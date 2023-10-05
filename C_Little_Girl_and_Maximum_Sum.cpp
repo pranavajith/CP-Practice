@@ -13,20 +13,13 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,k;
-    cin>>n>>k;
+    ll n, q;
+    cin>>n>>q;
     vector <ll> v(n);
     for (int i=0;i<n;i++)cin>>v[i];
-    ll iter = 0;
-    while (iter!=n){
-        if (iter+1 == k){
-            cout<<"YES\n";
-            return;
-        }
-        iter+=v[iter];
-        cout<<iter<<" ";
-    }
-    cout<<"NO\n";
+    sort(v.begin(),v.end(), greater<int>());
+    vector <ll> vn(n,0);
+    
 }
 
 int main() 

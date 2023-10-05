@@ -17,7 +17,7 @@ int sol(vector < vector <ll> > &v, ll count1, ll numfall, ll curcover){
     ll nofell = sol(v, count1+1, numfall, curcover);
     ll fell;
     if (curcover + v[count1-1][1] < v[count1-1][0])fell = sol(v, count1+1, numfall+1, v[count1-1][0]);
-    else if (v[count1][0]+v[count1][1] < v[count1+1][0])sol(v, count1+1, numfall+1, v[count1][0]+v[count1][1]);
+    else if (v[count1-1][0]+v[count1-1][1] < v[count1][0])sol(v, count1+1, numfall+1, v[count1-1][0]+v[count1-1][1]);
     else fell = sol(v, count1+1, numfall, curcover);
     cout<<nofell<<" "<<fell<<"\n";
     return max(fell, nofell);
