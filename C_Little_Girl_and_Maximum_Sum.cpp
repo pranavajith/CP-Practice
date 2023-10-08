@@ -17,9 +17,33 @@ void solve(){
     cin>>n>>q;
     vector <ll> v(n);
     for (int i=0;i<n;i++)cin>>v[i];
-    sort(v.begin(),v.end(), greater<int>());
+    sort(v.rbegin(),v.rend());
     vector <ll> vn(n,0);
-    
+    for (int i=0;i<q;i++){
+        ll l,r;
+        cin>>l>>r;
+        vn[l-1]++;
+        // cout<<r+1;
+        // cout<<"lol "<<r+1<<" !\n";
+        if (r<n){
+            // cout<<"yay!";
+            vn[r]--;
+            // cout<<r+1<<" "<<vn[r+1]<<"\n";
+        }
+        // vn[r--];
+    }
+    // for (auto d:vn)cout<<d<<" !";cout<<"\n";
+    for (int i=1;i<n;i++){
+        vn[i]+=vn[i-1];
+    }
+    // for (auto d:vn)cout<<d<<" !";cout<<"\n";
+    sort(vn.rbegin(), vn.rend());
+    // for (auto d:vn)cout<<d<<" !";cout<<"\n";
+    ll sol = 0;
+    for (int i=0;i<n;i++){
+        sol+=vn[i]*v[i];
+    }
+    cout<<sol<<"\n";
 }
 
 int main() 
