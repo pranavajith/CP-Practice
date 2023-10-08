@@ -13,47 +13,35 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, count2=1;
+    ll n;
     cin>>n;
+    // vector <ll> v(n);
     string s;
     cin>>s;
-    vector <ll> v(n, 1);
-    ll k = 1, alt = 1-(s[0]-'0'); s[0]='2'; bool first = true;
-    if (count(s.begin(), s.end(), '0') == n || count(s.begin(), s.end(), '1') == n){
-        cout<<n<<"\n";
-        for (int i=1; i<=n; i++){
-            cout<<i<<" ";
-        }
-        cout<<"\n";
-        return;
-    }
-    while (count2!=n){
-        // cout<<"hey!";
-        ll i = 0;
-        if (first){
-            i=1;
-            first = false;
-        }
-        else{for (; i<n; i++){
-            if (s[i]=='1' || s[i]=='0'){
-                alt = (s[i]-'0');
-                break;
+    // for (int i=0; i<n; i++)cin>>v[i];
+    vector <ll> ans(n);
+    vector <ll> pos0, pos1;
+    for (int i=0; i<n; i++){
+        ll newpos = pos0.size() + pos1.size()+1;
+        if (s[i]=='1'){
+            if (!pos0.empty())
+            {
+                newpos = pos0.back();
+                pos0.pop_back();
             }
-         }
+            pos1.push_back(newpos);
         }
-        for (; i<n; i++){
-            if ((s[i]-'0')==alt){
-                alt = 1-alt;
-                v[i]=k;
-                s[i]=2;
-                count2++;
+        else{
+            if (!pos1.empty()){
+                newpos = pos1.back();
+                pos1.pop_back();
             }
+            pos0.push_back(newpos);
         }
-        k++;
+        ans[i]=newpos;
     }
-    if(k!=1)cout<<k-1<<"\n";
-    else cout<<1<<"\n";
-    for (auto d:v)cout<<d<<" ";cout<<"\n";
+    cout<<pos0.size()+pos1.size()<<"\n";
+    for (int i=0; i<ans.size(); i++)cout<<ans[i]<<" "; cout<<"\n";
 }
 
 int main() 
