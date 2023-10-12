@@ -13,25 +13,24 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,k, counter = 1; string s;
-    cin>>n>>k>>s;
-    char c = s[0];
-    vector <ll> v;
-    for (int i=1; i<n; i++){
-        if (s[i]!=c){
-            c=s[i];
-            v.push_back(counter);
-            counter=1;
+    ll n;
+    cin>>n;
+    vector <ll> v(n);
+    for (int i=0; i<n; i++)cin>>v[i];
+    ll a = 0, b = n-1;
+    while (a<n && v[a]==a+1)a++;
+    if (a==n){
+        cout<<0<<"\n";
+        return;
+    }
+    while (b>=0 && v[b]==b+1)b--;
+    for (int i=a;i<=b;i++){
+        if (v[i]==i+1){
+            cout<<2<<"\n";
+        return;
         }
-        else counter++;
     }
-    v.push_back(counter);
-    // for (auto d:v)cout<<d<<" ";
-    ll k1=k, k2=k;
-    ll l = 0, r = 0, cursiz = 0;
-    while (r<n){
-        
-    }
+    cout<<1<<"\n";
 }
 
 int main() 
@@ -39,7 +38,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    // ll t; cin>>t; while(t--)
+    ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

@@ -13,25 +13,16 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,k, counter = 1; string s;
-    cin>>n>>k>>s;
-    char c = s[0];
-    vector <ll> v;
-    for (int i=1; i<n; i++){
-        if (s[i]!=c){
-            c=s[i];
-            v.push_back(counter);
-            counter=1;
-        }
-        else counter++;
+    ll n, sum1=0, maxnum = INT_MIN;
+    cin>>n;
+    for (int i=0;i<n;i++){
+        ll a;
+        cin>>a;
+        sum1+=a;
+        maxnum = max(maxnum, a);
     }
-    v.push_back(counter);
-    // for (auto d:v)cout<<d<<" ";
-    ll k1=k, k2=k;
-    ll l = 0, r = 0, cursiz = 0;
-    while (r<n){
-        
-    }
+    if (sum1%2==0 && maxnum <= sum1-maxnum)cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() 

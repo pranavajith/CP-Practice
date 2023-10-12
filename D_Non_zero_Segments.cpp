@@ -13,25 +13,29 @@ using namespace std;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,k, counter = 1; string s;
-    cin>>n>>k>>s;
-    char c = s[0];
-    vector <ll> v;
-    for (int i=1; i<n; i++){
-        if (s[i]!=c){
-            c=s[i];
-            v.push_back(counter);
-            counter=1;
+    ll n;
+    cin>>n;
+    map <ll,ll> m;
+    vector <ll> v(n);
+    // ll pref = 0, last = -1;
+    for (int i=0; i<n;i++)cin>>v[i];
+    ll pref = 0, ans = 0;
+    m[0]=1;
+    for (int i=0;i<n;i++){
+        pref+=v[i];
+        if (m[pref]){
+            // cout<<i<<" ";
+            ans++;
+            pref = v[i];
+            m.clear();
+            m[0]=1;
+            m[v[i]]=1;
         }
-        else counter++;
+        else{
+            m[pref]++;
+        }
     }
-    v.push_back(counter);
-    // for (auto d:v)cout<<d<<" ";
-    ll k1=k, k2=k;
-    ll l = 0, r = 0, cursiz = 0;
-    while (r<n){
-        
-    }
+    cout<<ans<<"\n";
 }
 
 int main() 

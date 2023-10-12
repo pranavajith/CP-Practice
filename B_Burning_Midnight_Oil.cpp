@@ -12,26 +12,34 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+ll check(ll mid, ll k){
+    ll ans=mid;
+    while (mid){
+        ans+=mid/k;
+        mid/=k;
+    }
+    return ans;
+}
+
 void solve(){
-    ll n,k, counter = 1; string s;
-    cin>>n>>k>>s;
-    char c = s[0];
-    vector <ll> v;
-    for (int i=1; i<n; i++){
-        if (s[i]!=c){
-            c=s[i];
-            v.push_back(counter);
-            counter=1;
+    ll n,k;
+    cin>>n>>k;
+    ll l = 0 , r = n, ans = n+1;
+    while (l<=r){
+        ll mid = (l+r)/2;
+        if (check(mid, k) == n){
+            ans = mid;
+            break;
         }
-        else counter++;
+        if (check(mid, k) < n) l = mid+1;
+        else {
+            r = mid-1;
+            if (check(ans, k) > check(mid, k)){
+                ans = mid;
+            }
+        }
     }
-    v.push_back(counter);
-    // for (auto d:v)cout<<d<<" ";
-    ll k1=k, k2=k;
-    ll l = 0, r = 0, cursiz = 0;
-    while (r<n){
-        
-    }
+    cout<<ans<<"\n";
 }
 
 int main() 
