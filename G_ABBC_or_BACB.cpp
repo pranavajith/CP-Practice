@@ -15,25 +15,27 @@ using namespace std;
 void solve(){
     string s;
     cin>>s;
-    ll iter = 0, sol = 0, finalconv = -1;
-    for (int i=0;i<s.size();i++){
-        if (s[i]=='B'){
-            sol+=iter;
-            finalconv = iter;
-            if(iter!=0)s[i]='C';
-            iter = 0;
-        }
-        else if (i==s.size()-1 && s[i]=='A' && s[i-1]=='B')sol++;
-        else if (i==s.size()-1 && s[i]=='A' && s[i-1]=='A'){
-            if (finalconv < iter+1){
-                sol += iter+1 - finalconv;
+    for (int i=0; i<s.size()-1; i++){
+            if (s[i]=='B' && s[i+1]=='B'){
+                cout<<count(s.begin(), s.end(), 'A')<<"\n";
+                return;
             }
         }
-        else{
-            iter++;
+    if (s.size()==1)cout<<0<<"\n";
+    else if (!(s[0]=='A' && s[s.size()-1]=='A'))cout<<count(s.begin(), s.end(), 'A')<<"\n";
+    else if (count(s.begin(), s.end(), 'B') == 0)cout<<0<<"\n";
+    else{
+        ll minA = INT_MAX, curans = 0;
+        for (int i=0; i<s.size(); i++){
+            if (s[i]=='A')curans++;
+            else{
+                minA = min(minA, curans);
+                curans = 0;
+            }
         }
+        minA = min(minA, curans);
+        cout<<count(s.begin(), s.end(), 'A')-minA<<"\n";
     }
-    cout<<sol<<"\n";
 }
 
 int main() 
