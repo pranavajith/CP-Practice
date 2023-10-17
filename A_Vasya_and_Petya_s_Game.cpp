@@ -12,30 +12,29 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve(){
-    ll n,m;
-    cin>>n>>m;
-    vector <ll> v(n, 0);
-    set <ll> alive;
-    for (int i=0; i<n; i++)alive.insert(i);
-    for (int i=0; i<m; i++){
-        int l,r,x;
-        cin>>l>>r>>x;
-        l--, r--, x--;
-        vector <ll> toerase;
-        auto it = alive.lower_bound(l);
-        while (it!=alive.end()){
-            if (*it > r)break;
-            if ((*it) != x){
-                toerase.push_back(*it); 
-                v[*it] = x+1;
-            }
-            it++;
-        }
-        for (int j=0; j<toerase.size(); j++)alive.erase(toerase[j]);
+bool isPrime(ll n){
+    for (int i=2; i*i <=n; i++){
+        if (n%i==0)return false;
     }
-    for (auto d:v)cout<<d<<" ";
+    return true;
+}
 
+void solve(){
+    ll n;
+    cin>>n;
+    // ll count1 = 0;
+    vector <ll> v;
+    for (int i=2; i<=n; i++){
+        if (isPrime(i)){
+            ll a1 = i;
+            while (a1<=n){
+                v.push_back(a1);
+                a1*=i;
+            }
+        }
+    }
+    cout<<v.size()<<"\n";
+    for (auto d:v)cout<<d<<" ";
 }
 
 int main() 

@@ -33,6 +33,7 @@ void solve(){
             it++;
         }
         for (int j=0; j<toerase.size(); j++)alive.erase(toerase[j]);
+        // for (auto d:v)cout<<d<<" "; cout<<"\n";
     }
     for (auto d:v)cout<<d<<" ";
 
