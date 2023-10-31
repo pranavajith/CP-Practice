@@ -48,26 +48,43 @@ ll nCk(ll n, ll k){
     return ((fact(n) * inv(fact(k)) % mod) * inv(fact(n-k))) % mod;
 }
 
-
-void solve() {
-    string s, s1, s2, s3;
-    cin >> s;
-    for (int i = 0; i < s.size(); i++) {
-        if (i % 2 == 0) {s1 += s[i];}
-        else if (i % 2 == 1) {s2 += s[i];}
+void solve(){
+    ll k;
+    cin>>k;
+    string s;
+    cin>>s;
+    ll n = s.size();
+    map <ll,ll> m;
+    vector <ll> sum1(n); ll count1 = 0;
+    for (int i=0; i<n; i++){
+        if (s[i]=='1')count1++;
+        sum1[i] = count1;
+        m[count1]++;
     }
-    if (s2.empty()) {
-        cout << stoi(s1) - 1<<"\n"; return;
+    // if (m[0] == 0) m[0]++;
+    m[0]++;
+    // for (auto d:sum1)cout<<d<<" ";
+    ll ans = 0;
+    if (k==0){
+        map <ll,ll> m1;
+        for (int i=0; i<n; i++){
+            m1[sum1[i]]++;
+            if (sum1[i]==0) ans+=m1[sum1[i]];
+            else ans+=m1[sum1[i]]-1;
+        }
+        cout<<ans<<"\n";
+        return;
     }
-    cout << (stoi(s1) + 1) * (stoi(s2) + 1) - 2 <<"\n";;
+    for (int i=0; i<n; i++) ans+=m[sum1[i] - k];
+    cout<<ans<<"\n";
 }
- 
+
 int main() 
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

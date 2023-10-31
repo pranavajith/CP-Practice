@@ -25,39 +25,51 @@ void solve(){
         else cout<<-1<<"\n";
         return;
     }
+    if (t.size()==1){
+        if (count(s.begin(), s.end(), t[0])){
+            cout<<1<<"\n";
+        }
+        else cout<<-1<<"\n";
+        return;
+    }
+    if (s.size()==1){
+        if (count(t.begin(), t.end(), s[0]) == t.size()){
+            cout<<t.size()<<"\n";
+        }
+        else cout<<-1<<"\n";
+        return;
+    }
     map <ll, vector <ll> > m;
     for (int i=0; i<s.size(); i++){
         m[s[i]].push_back(i);
     }
-    for (auto d:m){
-        cout<<char(d.first)<<" : ";
-        for (auto it : d.second){
-            cout<<it<<" ";
-        }
-        cout<<"\n";
-    }
-    ll curpos = m[t[0]][0];
+    // for (auto d:m){
+    //     cout<<char(d.first)<<" : ";
+    //     for (auto it : d.second){
+    //         cout<<it<<" ";
+    //     }
+    //     cout<<"\n";
+    // }
+    ll curpos = 0;
     // cout<<"curpos = "<<curpos<<"\n";
-    for (int i=1; i<t.size(); i++){
-        cout<<t[i]<<"\n";
-        cout<<"curpos = "<<curpos<<"\n";
-        if (m[t[i]].size()==0){
-            cout<<-1<<"\n";
+    for (int i=0; i<t.size(); i++){
+        // cout<<t[i]<<"\n";
+        // cout<<"curpos = "<<curpos<<"\n";
+        if (m[t[i]].empty()) {
+            cout << -1 << "\n";
             return;
         }
         // curpos++;
         // cout<<"curpos after change to be checked = "<<curpos<<"\n";
-        ll newpos = lower_bound(m[t[i]].begin(), m[t[i]].end(), curpos) - m[t[i]].begin();
-        // cout<<"newpos = "<<newpos<<"\n";
-        if (newpos == m[t[i]].size()){
-        // if (newpos == 0){
-            ans++;
-            curpos = m[t[i]][0]+1;
+        auto it = lower_bound(m[t[i]].begin(), m[t[i]].end(), curpos);
+    
+        if (it == m[t[i]].end()) {
+            ans++;  // If we can't find a position in the current character's positions, increment ans
+            curpos = m[t[i]][0] + 1;  // Set curpos to the first position of the current character
+        } else {
+            curpos = *it + 1;  // Set curpos to the next position of the current character
         }
-        else{
-            curpos = m[t[i]][newpos] + 1;
-        }
-        cout<<"anscur = "<<ans<<"\n\n";
+        // cout<<"anscur = "<<ans<<"\n\n";
     }
     cout<<ans<<"\n";
 }

@@ -1,0 +1,106 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <set>
+#include <cmath>
+#include <map>
+#include <sstream>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <limits>
+#include <iomanip>
+using namespace std;
+#define ll long long
+ll mod = 1e9 + 7;
+// #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
+
+ll fact(ll n){
+    ll ans = 1;
+    for (int i=2; i<=n; i++){
+        ans = (ans*i)%mod;
+    }
+    return ans;
+}
+
+ll powmod(ll a, ll b){
+    a %= mod;
+    if (a == 0) return 0;
+    ll product = 1;
+    while(b > 0){
+        if (b%2){
+            product *= a;
+            product %= mod;
+            --b;
+        }
+        a *= a;
+        a %= mod;
+        b >>= 1;
+    }
+    return product;
+}
+
+ll inv(ll a){
+    return powmod(a, mod-2);
+}
+
+ll nCk(ll n, ll k){
+    return ((fact(n) * inv(fact(k)) % mod) * inv(fact(n-k))) % mod;
+}
+
+void solve(){
+    ll n,k;
+    cin>>n>>k;
+    string s;
+    cin>>s;
+    if (s.size()==1){
+        for (int i=0; i<k; i++){
+            cout<<s;
+        }
+        cout<<"\n";
+    }
+    else{
+        char c = s[0];
+        for (int i=1; i<n; i++){
+            bool check1 = false;
+            if (s[i] == s[0]){
+                bool check = false;
+                for (int j=0; j<i; j++){
+                    if (i+j == n)break;
+                    if (s[j] < s[i+j]){
+                        // cout<<i<<" "<<j<<" "<<s[j]<<" "<<s[i+j]<<"\n";
+                        check = true;
+                        break;
+                    }
+                    if (s[j] > s[i+j]){
+                        break;
+                    }
+                }
+                if (check)check1 = true;
+            }
+            else if (s[i] > s[0]){
+                check1 = true;
+            }
+            if (check1){
+                s = s.substr(0, i);
+                break;
+            }
+        }
+        while (s.back() == s[0] && s.size()>1) s.pop_back();
+        while (s.size() < k){
+            s+=s;
+        }
+        s = s.substr(0,k);
+        cout<<s<<"\n";
+    }
+}
+
+int main() 
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    // TxtIO;
+    // ll t; cin>>t; while(t--)
+        solve();
+    return 0;
+}

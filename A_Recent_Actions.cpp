@@ -48,20 +48,24 @@ ll nCk(ll n, ll k){
     return ((fact(n) * inv(fact(k)) % mod) * inv(fact(n-k))) % mod;
 }
 
-
-void solve() {
-    string s, s1, s2, s3;
-    cin >> s;
-    for (int i = 0; i < s.size(); i++) {
-        if (i % 2 == 0) {s1 += s[i];}
-        else if (i % 2 == 1) {s2 += s[i];}
-    }
-    if (s2.empty()) {
-        cout << stoi(s1) - 1<<"\n"; return;
-    }
-    cout << (stoi(s1) + 1) * (stoi(s2) + 1) - 2 <<"\n";;
+void solve(){
+    ll n,m, a;
+    cin>>n>>m;
+    ll iter = n;
+    // vector <bool> v(1e7, false);
+    map <ll,ll> v;
+    for (int i=1; i<=n; i++) v[i] = 1;
+    vector <ll> ans(n+1, -1);
+    for (int i=0; i<m; i++){
+        cin>>a;
+        if (v[a] == 0){
+            v[a] = 1;
+            if (iter>=0)ans[iter--] = i+1;
+        }
+    }   
+    for (int i=1; i<=n; i++) cout<<ans[i]<<" "; cout<<"\n";
 }
- 
+
 int main() 
 {
     ios_base::sync_with_stdio(false);
