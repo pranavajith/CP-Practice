@@ -14,18 +14,21 @@ using namespace std;
 #define ll long long
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
-
+string s;
 void solve(){
-    ll n,m, x1,y1,x2,y2;
-    cin>>n>>m>>x1>>y1>>x2>>y2;
-    if (((x1 == 1 || x1 == n) && (y1==1 || y1==m)) || ((x2==1 || x2==n) && (y2==1 || y2==m))) cout<<2<<"\n";
-    else if (((x1 == 1 || x1 == n) || (y1==1 || y1==m)) || ((x2==1 || x2==n) || (y2==1 || y2==m))) cout<<3<<"\n";
-    else cout<<4<<"\n";
+    string s1;
+    cin>>s1;
+    int i;
+    for (i=0; i<s1.size(); i++){
+        if (s1[i] != s[i])break;
+    }
+    cout<<i<<"\n";
 }
 
 int main() 
 {
     ios_base::sync_with_stdio(false);
+    s="314159265358979323846264338327";
     cin.tie(NULL);
     // TxtIO;
     ll t; cin>>t; while(t--)

@@ -16,11 +16,17 @@ ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,m, x1,y1,x2,y2;
-    cin>>n>>m>>x1>>y1>>x2>>y2;
-    if (((x1 == 1 || x1 == n) && (y1==1 || y1==m)) || ((x2==1 || x2==n) && (y2==1 || y2==m))) cout<<2<<"\n";
-    else if (((x1 == 1 || x1 == n) || (y1==1 || y1==m)) || ((x2==1 || x2==n) || (y2==1 || y2==m))) cout<<3<<"\n";
-    else cout<<4<<"\n";
+    ll n;
+    cin>>n;
+    ll count1 = 2, ans = n, temp;
+    for (int i=n-1; i>0; i--){
+        temp = count1*i - (count1-1);
+        ans+=temp;
+        count1++;
+        // cout<<ans<<"\n";
+    }
+    // ans++;
+    cout<<ans<<"\n";
 }
 
 int main() 
@@ -28,7 +34,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

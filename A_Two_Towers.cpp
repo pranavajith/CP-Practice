@@ -16,11 +16,17 @@ ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n,m, x1,y1,x2,y2;
-    cin>>n>>m>>x1>>y1>>x2>>y2;
-    if (((x1 == 1 || x1 == n) && (y1==1 || y1==m)) || ((x2==1 || x2==n) && (y2==1 || y2==m))) cout<<2<<"\n";
-    else if (((x1 == 1 || x1 == n) || (y1==1 || y1==m)) || ((x2==1 || x2==n) || (y2==1 || y2==m))) cout<<3<<"\n";
-    else cout<<4<<"\n";
+    ll n,m;
+    cin>>n>>m;
+    string s1,s2;
+    cin>>s1>>s2;
+    reverse(s2.begin(), s2.end()); s1+=s2;
+    ll cnt = 0;
+    for (int i=0; i<n+m-1; i++){
+        if (s1[i]==s1[i+1])cnt++;
+    }
+    if (cnt>1)cout<<"NO\n";
+    else cout<<"YES\n";
 }
 
 int main() 
