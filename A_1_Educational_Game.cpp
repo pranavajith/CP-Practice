@@ -23,6 +23,7 @@ void solve(){
     }
     vector <ll> sol;
     ll t = n;
+    // this is the part for addinig 2
     for (int i=0;i<n-1;i++){
         // if (i==0){
             if (i==0)sol.push_back(v[0]);
