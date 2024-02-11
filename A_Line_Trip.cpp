@@ -15,31 +15,36 @@ using namespace std;
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve(){
-    ll n,x;
-    cin>>n>>x;
-    vector <ll> v(n);
-    for (int i=0; i<n; i++){
-        cin>>v[i];
-    }
-    // v.push_back(2*(x-v[n-1]));
-    vector <ll> ans(n+1);
-    for (int i=0; i<n; i++){
-        if (i==0) ans[i] = v[i];
-        else{
-            ans[i] = v[i] - v[i-1];
+int main() {
+    int t; cin >> t;
+    while(t--) {
+        int n, k;
+        cin >> n >> k;
+        int a[n];
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];
         }
-    }
-    ans[n] = 2*(x-v[n-1]);
-    cout<<*max_element(ans.begin(), ans.end())<<"\n";
+        int initial = 0;
+        int current = a[0];
+        for(int i = 1; i < n; i++) {
+            initial= a[i] - a[i-1];
+            if (initial >= current) {
+                current = initial;
+            }
+        }
+        // cout<< current;
+        int last=k-a[n-1];
+    //     if(last>current){
+    //         cout<<last<<endl;
+    //     }
+    //     else if(last*2>current && last*2>=last){
+    //         cout<<last*2<<endl;
+    //     }
+    //     else{
+    //         cout<<current<<endl;
+    //     }
+    // }
+    cout<<max(current, 2*last)<<"\n";
+    
 }
-
-int main() 
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    // TxtIO;
-    ll t; cin>>t; while(t--)
-        solve();
-    return 0;
 }

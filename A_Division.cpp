@@ -5,25 +5,23 @@
 #include <map>
 #include <sstream>
 #include <deque>
+#include <queue>
+#include <stack>
 #include <algorithm>
 #include <limits>
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll p,q;
-    cin>>p>>q;
-    ll ans = INT_MIN;
-    for (int i=1; i*i <= q; i++){
-        if (q%i==0){
-            ll p1 = p;
-            while (p1!=0 && p1 % q == 0)p1/=i;
-            ans = max(ans, p1);
-        }
-    }
-    cout<<ans<<"\n";
+    ll n;
+    cin>>n;
+    if (n<=1399) cout<<"Division 4\n";
+    else if (n<=1599) cout<<"Division 3\n";
+    else if (n<=1899) cout<<"Division 2\n";
+    else cout<<"Division 1\n";
 }
 
 int main() 

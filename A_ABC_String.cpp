@@ -12,22 +12,58 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+bool check(string &s) {
+    int cnt = 0;
+    for (int i=0; i<s.size(); i++) {
+        if (s[i] == '(') cnt++;
+        else {
+            if (cnt == 0) return false;
+            cnt--;
+        }
+    }
+    return (cnt == 0);
+}
+
 void solve(){
     string s;
     cin>>s;
-    map <char, ll> m;
-    // ll countA=0, countB=0, countC=0;
-    for (int i=0;i<s.size();i++){
-        m[s[i]]++;
+    /* 
+    A open, BC close
+    B open, AC close
+    C open, AB close
+    AB open, C close
+    AC open, B close
+    BC open, A close
+    */
+   string s1, s2, s3, s4, s5, s6;
+    for (int i=0; i<s.size(); i++) {
+        if (s[i] == 'A'){
+            s1 += '(';
+            s4 += '(';
+            s5 += '(';
+            s2 += ')';
+            s3 += ')';
+            s6 += ')';
+        }
+        else if (s[i] == 'B'){
+            s1 += ')';
+            s2 += '(';
+            s3 += ')';
+            s4 += '(';
+            s5 += ')';
+            s6 += '(';
+        }
+        else{
+            s1 += ')';
+            s2 += ')';
+            s3 += '(';
+            s4 += ')';
+            s5 += '(';
+            s6 += '(';
+        }
     }
-    // if (s[0]==s[s.size()-1] || (countA+countB!=countC && countA+countC!=countB && countB + countC != countA))cout<<"NO\n";
-    if (s[0]==s[s.size()-1])cout<<"NO\n";
-    else{
-        if (((s[0]=='A' && s[s.size()-1]=='C') || (s[0]=='C' && s[s.size()-1]=='A'))  && (m['A']+m['B']!=m['C'] && m['A']!=m['B']+m['C']))cout<<"NO\n";
-        else if (((s[0]=='A' && s[s.size()-1]=='B') || (s[0]=='B' && s[s.size()-1]=='A'))  && (m['A']+m['C']!=m['B'] && m['A']!=m['B']+m['C']))cout<<"NO\n";
-        else if (((s[0]=='C' && s[s.size()-1]=='B') || (s[0]=='B' && s[s.size()-1]=='C'))  && (m['A']+m['C']!=m['B'] && m['C']!=m['B']+m['A']))cout<<"NO\n";
-        else cout<<"YES\n";
-    }
+    if (check(s1) || check(s2) || check(s3) || check(s4) || check(s5) || check(s6)) cout<<"YES\n";
+    else cout<<"NO\n";
 }
 
 int main() 

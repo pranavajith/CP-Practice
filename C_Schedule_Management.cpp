@@ -15,32 +15,54 @@ using namespace std;
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve(){
-    double m; ll n,a;
-    cin>>n>>m;
-    // set <ll> s;
-    vector <ll> v(n);
-    for (int i=0; i<m; i++) cin>>v[i];
-    ll count1 = 0, t = 0;
-    while (count1!=m){
-        t+=2;
-        vector <ll> temp(n+1, 0);
-        // first iteration
-        for (int i=0; i<v.size(); i++){
-            if (temp[v[i]]<2){
-                temp[v[i]]++;
-                v[i] = -1;
-                count1++;
-            }
-        }
+// vector <ll> v; 
+ll n,m,a;
+map <ll,ll> m1;
 
-        if (count1==m) {
-            t--; break;
+bool check(ll n){
+    ll left = 0, helptasks = 0;
+    // cout<<"\n\n"<<n<<"\n";
+    for (auto d:m1){
+        // cout<<d.first<<" : "<<d.second<<"\n";
+        if (d.second > n){
+            left += d.second - n;
         }
-        // second iteration
-        for (int i=0; )
-
+        else {
+            helptasks += (n - d.second)/2;
+        }
+        // cout<<left<<" "<<helptasks<<"\n";
     }
+    if (helptasks >= left) return true;
+    return false;
+}
+
+void solve(){
+    cin>>n>>m;
+    // v.clear();
+    m1.clear();
+    for (int i=0; i<m; i++){
+        cin>>a;
+        // v.push_back(a);
+        m1[a]++;
+        // cout<<m1[a];
+    }
+    for (int i=1; i<=n; i++){
+        m1[i] = max(0LL, m1[i]);
+    }
+    ll l = 1, r = 2*m, ans;
+    while (l<=r){
+        ll mid = (l+r)/2;
+        if (check(mid)){
+            ans = mid;
+            r = mid-1;
+        }
+        else {
+            l = mid+1;
+        }
+    }
+    // for (auto d:m1) cout<<d.first<<" : "<<d.second<<"\n"; cout<<"yay!\n\n";
+    // if (check(3))cout<<"ok";
+    cout<<ans<<"\n";
 }
 
 int main() 

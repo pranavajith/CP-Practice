@@ -12,23 +12,32 @@ using namespace std;
 #define ll long long
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve(){
-    ll a,b,c;
-    cin>>a>>b>>c;
-    if (a+b == c)cout<<1<<"\n";
-    else if (c<=min(a,b))cout<<c+1<<"\n";
-    else if (c>=max(a,b))cout<<a+b-c+1<<"\n";
-    else{
-        cout<<min(a,b)+1<<"\n";
+int longestSuccessiveElements(vector<ll>&a) {
+    // Write your code here.
+    sort(a.begin(), a.end());
+    // for (auto d:a) cout<<d<<" "; cout<<"\n\n";
+    int n = a.size();
+    int maxlen = 1, right = 1, curlen = 1;
+    while (right<n) {
+        while (right < n && ((a[right] == a[right-1]) || a[right] == (a[right-1] + 1))) {
+            if (a[right] == a[right-1]+1) curlen++;
+            right++;
+            // cout<<curlen<<" ";
+        }
+        maxlen = max(maxlen, curlen);
+        curlen = 1, right++;
     }
+    return maxlen;
 }
 
 int main() 
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    // TxtIO;
-    // ll t; cin>>t; while(t--)
-        solve();
+    ll n;
+    cin>>n;
+    vector <ll> v(n);
+    for (int i=0; i<n; i++) cin>>v[i];
+    // sort(v.begin(), v.end());
+    // for (auto d:v) cout<<d<<" ";
+    cout<<longestSuccessiveElements(v);
     return 0;
 }

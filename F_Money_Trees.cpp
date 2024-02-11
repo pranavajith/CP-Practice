@@ -5,44 +5,47 @@
 #include <map>
 #include <sstream>
 #include <deque>
+#include <queue>
+#include <stack>
 #include <algorithm>
 #include <limits>
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
     ll n,k;
     cin>>n>>k;
-
-    vector <ll> apple(n);
-    vector <ll> height(n);
-
-    for (int i=0;i<n;i++)cin>>apple[i];
-    for (int i=0;i<n;i++)cin>>height[i];
-
-    if (*min_element(apple.begin(),apple.end())>k)cout<<0<<"\n";
-    else{
-        ll ans = INT_MIN;
-        ll a=0, b=0, curw=apple[0];
-        for (;b<n;b++){
-            if (height[b-1]%height[b]==0){
-                while (curw + apple[b] <= k && height[b-1]%height[b]==0){curw+=apple[b]; b++; }
-                ans = max(ans, b-a);
-                a++
-
-
-                if (b==n-1){
-                     ans = max(ans, b-a);
-                }
-            }
-            else{
-                ans = max(ans, b-a);
-            }
-        }
+    ll ans = 1;
+    vector <ll> countapples(n), height(n);
+    for (int i=0; i<n; i++) cin>>countapples[i];
+    for (int i=0; i<n; i++) cin>>height[i];
+    if (*min_element(countapples.begin(), countapples.end()) > k){
+        cout<<0<<"\n";
+        return;
     }
-
+    ll l = 0, r = 1, cursiz = 1, curap = countapples[0];
+    while (r<n) {
+        while (r<n && curap + countapples[r] <= k && (height[r-1] % height[r] == 0)) {
+            curap += countapples[r];
+            r++; cursiz++;
+            ans = max(ans, cursiz);
+        }
+        if (r==n) {
+            ans = max(ans, cursiz);
+            break;
+        }
+        if (height[r-1] % height[r]) {
+            ans = max(ans, cursiz); cursiz = 1; l = r; r = l + 1; curap = countapples[l];
+            continue;
+        }
+        cursiz--; curap -= countapples[l]; l++;
+        ans = max(ans, cursiz); 
+    }
+    ans = max(ans, cursiz);
+    cout<<ans<<"\n";
 }
 
 int main() 

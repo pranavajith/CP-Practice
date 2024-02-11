@@ -18,9 +18,18 @@ ll mod = 1e9 + 7;
 void solve(){
     ll n,k;
     cin>>n>>k;
-    vector <ll> v(n);
-    for (int i=0; i<n;i++) cin>>v[i];
-    
+    vector <ll> v(n+1);
+    for (int i=0; i<n;i++) {
+        ll a; cin>>a;
+        v[a] = i+1;
+    }
+    ll counter = 0;
+    for (int i=1; i<=n; i++) {
+        if (abs(i - v[i]) % k != 0) counter++;
+    }
+    if (counter == 0) cout<<0<<"\n";
+    else if (counter == 2) cout<<1<<"\n";
+    else cout<<-1<<"\n";
 }
 
 int main() 

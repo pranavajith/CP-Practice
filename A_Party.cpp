@@ -15,33 +15,32 @@ using namespace std;
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-void solve(){
-    ll n, ans = 0; cin>>n;
-    vector <ll> v(n); for (int i=0; i<n; i++) cin>>v[i];
-    if (count(v.begin(), v.end(), -1) == n){
-        cout<<1<<"\n";
-        return;
+ll dfs(vector <vector <ll> > &adj, int child) {
+    if (adj[child].size()==0) return 1;
+    ll ans = 0;
+    for (auto d:adj[child]) {
+        ans = max(ans, 1 + dfs(adj, d));
     }
-    vector < map <ll,bool> > m;
-    for (int i=0; i<n; i++){
-        if (v[i] != -1){
-            bool check = false;
-            for (auto d:m){
-                if (!d[v[i]]){
-                    d[v[i]] = true;
-                    check = true;
-                    break;
-                }
-            }
-            if (!check){
-                ans++;
-                map <ll, bool> m1; m1[v[i]] = true;
-                m.push_back(m1);
-            }
+    return ans;
+}
+
+void solve(){
+    vector <ll> no_manager;
+    ll n; cin>>n;
+    vector <vector <ll> > adj(n+2);
+    ll a;
+    for (int i=0; i<n; i++) {
+        cin>>a;
+        if (a==-1) no_manager.push_back(i+1);
+        else {
+            adj[i+1].push_back(a);
         }
     }
+    ll ans = 1;
+    for (auto d:no_manager){
+        ans = max(ans, dfs(adj, d));
+    }
     cout<<ans<<"\n";
-
 }
 
 int main() 

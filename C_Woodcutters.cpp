@@ -5,39 +5,37 @@
 #include <map>
 #include <sstream>
 #include <deque>
+#include <queue>
+#include <stack>
 #include <algorithm>
 #include <limits>
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-int sol(vector < vector <ll> > &v, ll count1, ll numfall, ll curcover){
-    if (count1==v.size()-1)return numfall+1;
-    ll nofell = sol(v, count1+1, numfall, curcover);
-    ll fell;
-    if (curcover + v[count1-1][1] < v[count1-1][0])fell = sol(v, count1+1, numfall+1, v[count1-1][0]);
-    else if (v[count1-1][0]+v[count1-1][1] < v[count1][0])sol(v, count1+1, numfall+1, v[count1-1][0]+v[count1-1][1]);
-    else fell = sol(v, count1+1, numfall, curcover);
-    cout<<nofell<<" "<<fell<<"\n";
-    return max(fell, nofell);
+vector <ll> dp(1e5+1, -1);
+
+ll f (ll ind, vector<pair<ll,ll> > &v, ll curpos, ll cnt){
+    if (ind == 0) return cnt+1;
+    if (dp[ind] != -1) return dp[ind];
+    if (v[ind].first + v[ind].second < curpos) return dp[ind] = f(ind-1, v, v[ind].first, cnt+1);
+    ll fallLeft = -1e9;
+    if (v[ind].first - v[ind].second > v[ind-1].first) fallLeft = f(ind-1, v, v[ind].first - v[ind].second, cnt+1);
+    return dp[ind] = max(fallLeft, f(ind-1, v, v[ind].first, cnt));
 }
 
 void solve(){
     ll n;
     cin>>n;
-    vector <vector <ll> > v;
-    for (int i=0;i<n;i++){
-        ll a,b;
-        cin>>a>>b;
-        vector <ll> v1;
-        v1.push_back(a); 
-        v1.push_back(b);
-        v.push_back(v1); 
-    }
-    cout<<sol(v, 1, 1, v[0][0]);
-
+    for (int i=0; i<n; i++) dp[i] = -1;
+    vector <pair<ll,ll> > v(n);
+    for (int i=0; i<n; i++) cin>>v[i].first>>v[i].second;
+    vector <ll> dp(n, -1);
+    cout<< f(n-1, v, 1e18, 0)<<"\n";
 }
+
 
 int main() 
 {

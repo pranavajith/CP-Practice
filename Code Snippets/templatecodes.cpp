@@ -54,7 +54,7 @@ ll inv(ll a){
     return powmod(a, mod-2);
 }
 
-ll nCk(ll n, ll k){
+ll nCk(ll n, ll k){ 
     return ((fact(n) * inv(fact(k)) % mod) * inv(fact(n-k))) % mod;
 }
 

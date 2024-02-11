@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <set>
+#include <cmath>
+#include <map>
+#include <sstream>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <algorithm>
+#include <limits>
+#include <iomanip>
+using namespace std;
+#define ll long long
+ll mod = 1e9 + 7;
+// #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
+
+void solve(){
+    ll n,d;
+    cin>>n>>d;
+    vector <ll> v(n);
+    for (int i=0; i<n; i++) cin>>v[i];
+    if (count(v.begin(), v.end(), 1) == n) {
+        cout<<-1<<"\n";
+        return;
+    }
+    vector <ll> ans(n, -1);
+    for (int i=0; i<n; i++){
+        if (v[i] == 0) ans[i] = 0;
+    }
+    for (int i = 0; i<n; i++) {
+        if (v[i] == 0) continue;
+        ll iter = i, counter = 0;
+        while (true) {
+            iter = (iter - d + n) % n;
+            if (iter == i) {
+                cout<<-1<<"\n";
+                return;
+            }
+            counter++;
+            if (ans[iter] != -1) {
+                ans[i] = counter + ans[iter]; 
+                break;
+            }
+        }
+    }
+    cout<<*max_element(ans.begin(), ans.end())<<"\n";
+}
+
+int main() 
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    // TxtIO;
+    ll t; cin>>t; while(t--)
+        solve();
+    return 0;
+}

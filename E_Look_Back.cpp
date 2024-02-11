@@ -12,42 +12,34 @@
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-vector <ll> power2;
+// vector <ll> pow2;
 
 void solve(){
-    ll n, ans = 0;
+    ll n;
     cin>>n;
-    vector <ll> v(n);
-    for (int i=0; i<n; i++)cin>>v[i];
-    if (n==1){
-        cout<<0<<"\n";
-        return;
-    }
+    vector <double> v(n);
+    for (int i=0; i<n; i++) cin>>v[i];
+    ll ans = 0, x = 0;
     for (int i=1; i<n; i++){
-        if (v[i]>=v[i-1])continue;
-        ll l = 0;
-        ll r = 30;
-        while (l<r){
-            // cout<<"ok";
-            ll mid = (l+r)/2;
-            if (v[i] * power2[mid] >= v[i-1]) r = mid;
-            else l = mid+1;
+        ll a = v[i-1], b = v[i];
+        while (x && b>a){
+            x--; a*=2;
         }
-        v[i]*=power2[l];
-        ans+=l+1;
-        // cout<<i<<" : "<<l+1<<" ";
+        while (a>b){
+            x++; b*=2;
+        }
+        ans += x;
     }
     cout<<ans<<"\n";
 }
 
 int main() 
 {
-    power2.push_back(2);
-    for (ll i = 0; i<30; i++){
-        power2.push_back(power2.back()*2);
-    }
+    // pow2.push_back(1);
+    // for (int i=0; i<62 ; i++) pow2.push_back(pow2.back()*2);
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;

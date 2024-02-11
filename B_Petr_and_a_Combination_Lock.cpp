@@ -15,22 +15,17 @@ using namespace std;
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
-bool check(vector <ll> v, ll ind, ll cursum, ll n){
-    if (ind == n) {
-        if (cursum%360==0) return true;
-        else return false;
-    }
-    return check(v, ind+1, cursum-v[ind], n) || check(v, ind+1, cursum+v[ind], n);
-}
-
 void solve(){
-    ll n;
+    ll n, a, cur = 0;
     cin>>n;
-    vector <ll> v(n);
-    for (int i=0; i<n; i++) cin>>v[i];
-    if (check(v, 1, v[0], n) || (check(v, 1, -1*v[0], n))) cout<<"YES\n";
+    bitset <2701> b;
+    for (int i=0; i<n; i++) {
+        cin>>a;
+        b |= a;
+        b |= (180-a);
+    }   
+    if (b[0]) cout<<"YES\n";
     else cout<<"NO\n";
-
 }
 
 int main() 
