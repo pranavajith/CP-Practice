@@ -15,24 +15,29 @@ using namespace std;
 ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
+int calc(int a, int b, int c) {
+	return abs(a - b) + abs(a - c) + abs(b - c);
+}
+
 void solve(){
-    vector <ll> v(3);
-    for (int i=0; i<3; i++) cin>>v[i];
-    sort(v.begin(), v.end());
-    if (v[1] == v[0]) {
-        if (v[2] == v[1] || v[2] == v[1]-1) cout<<0<<"\n";
-        else {
-            cout<<v[2]-1-v[0]+v[2]-1-v[1]<<"\n";
-        }
-    }
-    else {
-        if (v[1] == v[2]){
-            cout<<v[1]-1-v[0]+v[2]-1-v[0]<<"\n";
-        }
-        else {
-            cout<<v[1]-1-v[0] + v[2] - 1 - v[0] + v[2] - v[1]<<"\n";
-        }
-    }
+    int q;
+	cin >> q;
+	for (int i = 0; i < q; ++i) {
+		int a, b, c;
+		cin >> a >> b >> c;
+		int ans = calc(a, b, c);
+		for (int da = -1; da <= 1; ++da) {
+			for (int db = -1; db <= 1; ++db) {
+				for (int dc = -1; dc <= 1; ++dc) {
+					int na = a + da;
+					int nb = b + db;
+					int nc = c + dc;
+					ans = min(ans, calc(na, nb, nc));
+				}
+			}
+		}
+		cout << ans << endl;
+	}
 }
 
 int main() 
@@ -40,7 +45,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    ll t; cin>>t; while(t--)
+    // ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

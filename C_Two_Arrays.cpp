@@ -12,54 +12,31 @@
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
-ll mod = 1e9+7;
-
-ll fact(ll n){
-    ll ans = 1;
-    for (int i=2; i<=n; i++){
-        ans = (ans*i)%mod;
-    }
-    return ans;
-}
-
-ll powmod(ll a, ll b){
-    a %= mod;
-    if (a == 0) return 0;
-    ll product = 1;
-    while(b > 0){
-        if (b%2){
-            product *= a;
-            product %= mod;
-            --b;
-        }
-        a *= a;
-        a %= mod;
-        b >>= 1;
-    }
-    return product;
-}
-
-ll inv(ll a){
-    return powmod(a, mod-2);
-}
-
-ll nCk(ll n, ll k){
-    return ((fact(n) * inv(fact(k)) % mod) * inv(fact(n-k))) % mod;
-}
 
 void solve(){
-    ll n,m;
-    cin>>n>>m;
-    cout<<nCk(n+2*m-1, 2*m);
-}   
+    ll n;
+    cin>>n;
+    vector <ll> a(n), b(n);
+    for (int i=0; i<n; i++) cin>>a[i]; 
+    for (int i=0; i<n; i++) cin>>b[i];
+    sort(a.begin(), a.end()); 
+    sort(b.begin(), b.end()); 
+    for (int i=0; i<n; i++){
+        if (b[i] != a[i] && b[i]!=a[i]+1) {
+            cout<<"NO\n"; return;
+        }
+    }
+    cout<<"YES\n";
+}
 
 int main() 
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     // TxtIO;
-    // ll t; cin>>t; while(t--)
+    ll t; cin>>t; while(t--)
         solve();
     return 0;
 }

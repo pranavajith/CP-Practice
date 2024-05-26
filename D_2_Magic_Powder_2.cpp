@@ -12,59 +12,47 @@
 #include <iomanip>
 using namespace std;
 #define ll long long
-ll mod = 1e9 + 7;
-// #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
- vector <ll> v1, v2;
- ll n,k,a;
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define lld long double
+#define f(i,a,b) for(int i = a; i < b; i++)
+#define fe(i,a,b) for(int i = a; i >= b; i--)
+#define vll vector<ll>
+#define sor(v) v.begin(),v.end()
 
-bool check(ll mid){
-    ll lol = k;
-    for (int i=0; i<n; i++){
-        if ((LLONG_MAX / v1[i]) < mid) return false;
-        if (v1[i] * mid > v2[i]) {
-            // cout<<v1[i] * mid<<" "<<v2[i]<<"\n";
-            lol -= ((v1[i] * mid) - v2[i]);
-        }
-        // else cout<<"shiyat";
-        if (lol < 0) return false;
+bool check(ll mid, vector<ll> &a, vector<ll> &b, ll k){
+    ll sum = 0;
+    for(ll i = 0; i < a.size() ; i++){
+        if (mid > 1e17/a[i]) return false;
+        sum += max(0ll, mid*a[i] - b[i]);
+        if(sum > k) return false;
     }
-    // cout<<"yay!";
     return true;
 }
-
 void solve(){
-    // ll n,k,a;
-    cin>>n>>k;
-    // vector <ll> v1, v2;
-    for (int i=0; i<n; i++){
-        cin>>a;
-        v1.push_back(a);
-    }
-    for (int i=0; i<n; i++){
-        cin>>a;
-        v2.push_back(a);
-    }
-    ll l = 0, r = 1e18+1, ans = 0; bool check1 = true, check2 = true;
-    while (l<=r){
-        ll mid = l + (r-l)/2;
-        // cout<<l<<" "<<r<<"\n";
-        if (check(mid)){
-            ans = mid;
-            l = mid+1;
+    ll n, k; cin >> n >> k;
+    vll a(n), b(n);
+    f(i,0,n) cin >> a[i];
+    f(i,0,n) cin >> b[i];
+    ll left = 0, right = 1e12, ans = 0;
+    while(left <= right){
+        ll mid = (left + right)/2;
+        if(check(mid,a,b,k)){
+            ans = mid, left = mid + 1;
         }
-        else r = mid - 1;
+        else right = mid - 1;
     }
-    // if (check(24999999999999999)) cout<<"yay!!!!!";
-    cout<<ans<<"\n";
+    cout << ans << endl;
 }
 
-int main() 
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    // TxtIO;
-    // ll t; cin>>t; while(t--)
+int main(){
+    ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
+    ll t;
+    t = 1;
+    while(t--){
         solve();
-    return 0;
+    }
+return 0;
 }

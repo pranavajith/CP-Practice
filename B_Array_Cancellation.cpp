@@ -16,26 +16,27 @@ ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n;
-    cin>>n;
-    vector <ll> v(n);
-    for (int i=0; i<n; i++) cin>>v[i];
-    ll pos = 0;
-    for (int i=0; i<n; i++) if (v[i]>0) pos += v[i];
-    if (pos == 0) {
-        cout<<0<<'\n';
-        return;
-    }
-    ll left = 0, right = n-1, cnt = 0;
-    while (left <= right) {
-        while (left <= right && v[left] <= 0) left++;
-        while (left <= right && v[right] >= 0) right--;
-        if (left >= right) break;
-        ll temp = min(abs(v[left]), abs(v[right]));
-        cnt += temp;
-        v[left] -= temp; v[right] += temp;
-    }
-    cout<<pos - cnt<<"\n";
+    int n; cin >> n;
+        int arr[n + 1];
+        
+        for(int i = 0; i < n; i++) cin >> arr[i];
+        
+        long long pos_val = 0;
+        long long remaining_neg_val  = 0;
+        
+        for(int i = 0; i < n; i++){
+            if(arr[i] >=0) 
+                pos_val += arr[i];  
+            else{
+                if(pos_val >= abs(arr[i]))
+                    pos_val -= abs(arr[i]);
+                else{
+                    remaining_neg_val += abs(arr[i]) - pos_val;
+                    pos_val = 0;
+                }
+            }
+        }
+        cout << remaining_neg_val<< endl;
 }
 
 int main() 

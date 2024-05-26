@@ -5,44 +5,36 @@
 #include <map>
 #include <sstream>
 #include <deque>
+#include <queue>
+#include <stack>
 #include <algorithm>
 #include <limits>
 #include <iomanip>
 using namespace std;
 #define ll long long
+ll mod = 1e9 + 7;
 // #define TxtIO   freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt", "w", stderr);
 
 void solve(){
-    ll n, sum1=0, curmax = INT_MIN, cursign;
+    ll n;
     cin>>n;
-    vector <ll> v;
-    for (int i=0;i<n;i++){
-        ll a;
-        if (i==0){
-            cin>>a;
-            cursign = a/abs(a);
-            curmax = a;
-            if (n==1)sum1=a;
+    vector <ll> v(n);
+    for (int i=0; i<n; i++) cin>>v[i]; 
+    bool pos = true;
+    if (v[0] < 0) pos = false;
+    ll ans = 0;
+    ll a = v[0];
+    for (int i=1; i<n; i++){
+        if ((pos && v[i]<0) || (!pos && v[i]>0)) {
+            ans += a;
+            a = v[i];
+            if (v[i] > 0) pos = true;
+            else pos = false;
         }
-        else{
-            cin>>a;
-            if (a/abs(a) != cursign || i==n-1){
-                if (i==n-1 && a/abs(a)==cursign)curmax = max(curmax, a);
-                else if (i==n-1 && a/abs(a)!=cursign){
-                    sum1+=curmax;
-                    curmax=a;
-                }
-                cursign *= -1;
-                // cout<<curmax<<" ";
-                sum1+=curmax;
-                curmax = a;
-            }
-            else{
-                curmax = max(curmax, a);
-            }
-        }
+        else a = max(a, v[i]);
     }
-    cout<<sum1<<"\n";
+    ans += a;
+    cout<<ans<<"\n";
 }
 
 int main() 

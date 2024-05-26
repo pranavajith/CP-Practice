@@ -22,8 +22,8 @@ void solve(){
         cout<<0<<"\n";
         return;
     }
-    ll ans = 0;
-    for (int i=2; i <= n; i++){
+    ll ans = 1;
+    for (ll i=2; i <= n/2; i++){
         ll temp = n % (2*i-2);
         // if (n % (2*i-2) == x || (x==2 && n % (2*i-2) == 0)) ans++;
         if ((temp <= i && (temp == x || (temp == 0 && x == 2))) || (temp > i && i - (temp - i) == x)) ans++;
