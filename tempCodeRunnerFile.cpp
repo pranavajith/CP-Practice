@@ -1,1 +1,2 @@
- 
+
+#define ll long long
